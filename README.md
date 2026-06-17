@@ -6,7 +6,7 @@ written as a way of learning C++ (with RcppArmadillo, called from R).
 ## Layout
 
 ```
-estimators/   C++ estimator functions (ols.cpp, ridge.cpp)
+estimators/   C++ estimator functions (ols.cpp, ridge.cpp, logit.cpp)
 examples/     R scripts demonstrating them
 ```
 
@@ -39,15 +39,38 @@ fit$coefficients   # intercept, slope
 fit$lambda         # penalty used
 ```
 
-## Example
+## Logistic
 
-Run from the repository root; it fits both estimators and writes `plot.png`:
+A logistic regression estimator fit by iteratively reweighted least squares
+(Newton-Raphson). `logit_full()` returns the coefficients and their standard
+errors; it matches R's `glm(..., family = binomial)`.
+
+```r
+library(Rcpp)
+sourceCpp("estimators/logit.cpp")
+
+fit <- logit_full(cbind(1, x), y)
+fit$coefficients   # intercept, slope (log-odds scale)
+fit$stderr         # standard errors
+```
+
+## Examples
+
+Run from the repository root.
+
+`examples/example.R` overlays the OLS fit with ridge fits at increasing
+`lambda` — the slope visibly shrinks toward zero as the penalty grows:
 
 ```sh
 Rscript examples/example.R
 ```
 
-The plot overlays the OLS fit with ridge fits at increasing `lambda` — the
-slope visibly shrinks toward zero as the penalty grows.
-
 ![OLS vs Ridge fits](examples/plot.png)
+
+`examples/logit_example.R` plots the fitted probability curve over binary data:
+
+```sh
+Rscript examples/logit_example.R
+```
+
+![Logistic fit](examples/logit_plot.png)

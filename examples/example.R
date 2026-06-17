@@ -1,4 +1,4 @@
-# Run from the repository root: Rscript examples/example.R
+# run from the repository root: Rscript examples/example.R
 library(Rcpp)
 sourceCpp("estimators/ols.cpp")
 sourceCpp("estimators/ridge.cpp")
@@ -15,7 +15,9 @@ plot(x, y, pch = 19, col = "steelblue",
      main = "OLS vs ridge: larger lambda shrinks the slope")
 abline(ols[1], ols[2], col = "red", lwd = 2)
 
-# Ridge fits at increasing penalties — the line flattens as lambda grows
+# ridge fits at increasing penalties — the line flattens as lambda grows.
+# x is on its raw scale (~0..10), so x'x for the slope is ~3300; lambda only
+# bites once it is comparable to that, hence these large values
 lambdas <- c(500, 2000, 5000)
 greens  <- c("#74c476", "#31a354", "#006d2c")
 for (i in seq_along(lambdas)) {
