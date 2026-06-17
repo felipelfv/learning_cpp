@@ -47,4 +47,7 @@ Run from the repository root; it fits both estimators and writes `plot.png`:
 Rscript examples/example.R
 ```
 
-![OLS vs Ridge fit](plot.png)
+The plot overlays the OLS fit with ridge fits at increasing `lambda` — the
+slope visibly shrinks toward zero as the penalty grows.
+
+![OLS vs Ridge fits](examples/plot.png)
