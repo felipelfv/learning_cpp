@@ -11,8 +11,7 @@ X <- cbind(1, x)
 ols <- as.numeric(ols_full(X, y)$coefficients)
 
 png("examples/plot.png", width = 800, height = 600)
-plot(x, y, pch = 19, col = "steelblue",
-     main = "OLS vs ridge: larger lambda shrinks the slope")
+plot(x, y, pch = 19, col = "steelblue")
 abline(ols[1], ols[2], col = "red", lwd = 2)
 
 # ridge fits at increasing penalties — the line flattens as lambda grows.

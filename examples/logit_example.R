@@ -16,7 +16,6 @@ phat <- 1 / (1 + exp(-(b[1] + b[2] * grid)))
 
 png("examples/logit_plot.png", width = 800, height = 600)
 plot(x, y, pch = 19, col = "#3b7dd855",
-     main = "logistic regression: fitted probability",
      xlab = "x", ylab = "y / P(y = 1)")
 lines(grid, phat, col = "red", lwd = 2)
 dev.off()
